@@ -1,0 +1,81 @@
+.popQuiz {
+  position: absolute;
+  z-index: 2;
+  width: calc(100% - 40px);
+  height: calc(100vh - 40px);
+  background-color: white;
+  top: 20px;
+  left: 20px;
+  -webkit-box-shadow: 0px 10px 30px 0px rgba(78,76,135,0.8);
+  -moz-box-shadow: 0px 10px 30px 0px rgba(78,76,135,0.8);
+  box-shadow: 0px 10px 30px 0px rgba(78,76,135,0.8);
+}
+
+.x {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+
+/* QUESTIONS */
+
+.ques {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 80px 1fr 1fr;
+  height: calc(100vh - 200px);
+  margin: 20px;
+}
+
+.question {
+  color: rgb(74, 74, 74);
+  font-weight: 700;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.qbox {
+  margin: 15px;
+  color: rgb(83, 100, 157);
+  background-color: rgb(240, 240, 240);
+  border: 1px rgba(185, 185, 185, 0.7) solid;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  -webkit-box-shadow: -2px 5px 12px 0px rgba(78,76,135,0.5);
+  -moz-box-shadow: -2px 5px 12px 0px rgba(78,76,135,0.5);
+  box-shadow: -2px 5px 12px 0px rgba(78,76,135,0.5);
+}
+.correct {
+  animation-name: correct;
+  animation-duration: 0.5s;
+}
+.not {
+  animation-name: not;
+  animation-duration: 0.5s;
+}
+
+@keyframes correct {
+  from {
+    background-color: rgb(240, 240, 240);
+  }
+  to {
+    background-color: green;
+  }
+}
+@keyframes not {
+  from {
+    background-color: rgb(240, 240, 240);
+  }
+  to {
+    background-color: red;
+  }
+}
+
+

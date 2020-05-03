@@ -1,0 +1,17 @@
+.communityQuesDiv {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.boxRow {
+  display: flex;
+  align-content: center;
+}
+
+.boxRow > p {
+  flex:1 1 auto;
+  border:1px red solid;
+  text-align:center;
+
+  margin:5px;  /* and that, will result in a 10px gap */
+}

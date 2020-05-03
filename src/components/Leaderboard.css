@@ -1,0 +1,114 @@
+h2 {
+  margin: 0.2em 0.4em;
+  color: rgb(50, 50, 50);
+  fill: rgb(50, 50, 50);
+}
+h2 span {
+  padding-left: 15px;
+  font-weight: bold;
+}
+
+.board {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0 auto;
+  overflow:hidden; 
+  overflow-y:scroll;
+  max-height: calc(100vh - 240px);
+}
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: none;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(185, 185, 185);
+  border-radius: 10px;
+  opacity: 0.3;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(185, 185, 185);
+  border-radius: 10px; 
+  opacity: 0.8;
+}
+.rank {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  border: 2px solid rgba(185, 185, 185, 0.7);
+  border-radius: 3px;
+  margin: 3%;
+  -webkit-box-shadow: 0px 2px 3px 0 rgba(0, 0, 0, 0.144);
+  -moz-box-shadow: 0px 2px 3px 0 rgba(0, 0, 0, 0.144);
+  box-shadow: 0px 2px 3px 0 rgba(0, 0, 0, 0.144);
+}
+.num {
+  width: 15%;
+  font-weight: 600;
+  min-height: 22px;
+  border-right: 2px rgba(185, 185, 185, 0.7) solid;
+  border-radius: 2px;
+  text-align: center;
+  padding: 3px;
+}
+.top3 {
+  text-shadow: 0px 3px 5px rgba(43, 50, 73, 0.6);
+  color: white;
+  font-weight: 900;
+  font-size: 1.2em;
+}
+.c0 {
+  background: linear-gradient(60deg, #BF953F, rgb(211, 206, 156), #AA771C); 
+  padding: 6px;
+  width: 14%;
+}
+.c1 {
+  background: linear-gradient(60deg, #848fa0, #c1c3c5,#848fa0);
+  padding: 5px;
+  width: 14%;
+}
+.c2 {
+  background:  linear-gradient(60deg, #CD7F32, rgb(209, 180, 152), #CD7F32);
+  padding: 4px;
+  width: 14%;
+}
+.rest {
+  background-color: rgb(219, 219, 219);
+}
+.cont {
+  width: 78%;
+}
+.name {
+  padding-left: 10px;
+}
+.score {
+  float: right;
+  font-weight: 700;
+}
+
+.timeRank {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  color: rgb(113, 113, 113);
+  font-size: 0.75em;
+  border: 2px solid rgb(230, 230, 230);
+  border-radius: 3px;
+  margin: 3%;
+  background-color: rgb(243, 243, 243);
+  font-weight: 500;
+}
+.timeRank > span {
+  text-align: center;
+  padding: 3px;
+  cursor: pointer;
+  width: 25%;
+  transition: all 0.5s ease;
+}
+.active {
+  background-color: rgb(106, 128, 176);
+  color: white;
+  transform: scale(1.12);
+}

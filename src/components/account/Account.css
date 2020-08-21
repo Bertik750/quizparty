@@ -15,16 +15,22 @@
 .reg {
   margin: auto;
   text-align: center;
-  width: 50%;
-  height: 50vh;
+  width: 500px;
+  height: 450px;
   background-color: white;
   -webkit-box-shadow: 0px 10px 30px 0px rgba(78,76,135,0.8);
   -moz-box-shadow: 0px 10px 30px 0px rgba(78,76,135,0.8);
   box-shadow: 0px 10px 30px 0px rgba(78,76,135,0.8);
 }
 
+@media only screen and (max-width: 650px) {
+  .reg {
+    width: 90vw;
+  }
+}
+
 .xx {
-  float: right;
+  float: right; 
   cursor: pointer;
   margin-top: 10px;
   margin-right: 10px;
@@ -33,7 +39,7 @@
 .container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 input::-webkit-input-placeholder, button {
@@ -65,3 +71,156 @@ input::-webkit-input-placeholder, button {
   transform: translateY(-20px);
   visibility: visible !important;
 }
+
+.profileButton {
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  width: 5.5em;
+  height: 2em;
+
+  border-radius: 5px;
+  border: 0.125em solid rgb(119, 149, 189);
+  background-color: rgb(134, 177, 233);
+
+}
+
+.profileButton:hover {
+  cursor: pointer;
+  border: 0.125em solid rgb(134, 177, 233);
+  background-color: rgb(119, 149, 189);
+
+  -webkit-box-shadow: 0px 4px 15px 0px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 4px 15px 0px rgba(0,0,0,0.25);
+  box-shadow: 0px 4px 15px 0px rgba(0,0,0,0.25);
+}
+
+
+.profileHead {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  height: 40px;
+}
+.signOut {
+  margin: 0 0.2em 0 0;
+  cursor: pointer;
+  background-color: rgb(235, 235, 235);
+  border-radius: 2px;
+  border: 0.125em solid rgb(200, 200, 200);
+  transform: translateY(-0.15em);
+}
+
+.level {
+  text-align: center;
+  margin: 0;
+}
+
+.levelProgressBox {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  line-height: 6px;
+}
+
+.progressbar {
+  width: 50%;
+  background-color: rgb(220, 220, 220);
+  border-radius: 2px;
+  height: 5px;
+  /* (height of inner div) / 2 + padding */
+}
+
+.progressbar>div {
+  background-color: rgb(108, 125, 182);
+  height: 5px;
+  border-radius: 2px;
+}
+
+.flag {
+  -webkit-filter: drop-shadow(1px 2px 2px #6e6e6e);
+  filter: drop-shadow(1px 2px 2px #6e6e6e);
+  margin: 0 10px;
+}
+
+/* LOGIN/REGISTER FORM */
+
+.formContainer {
+  margin: 1em auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 75%;
+}
+.logRegInput {
+  background-color: rgb(243, 243, 243);
+  border: none;
+  border-radius: 3px;
+  height: 2em;
+  padding: 0.5em;
+  margin: 0.2em 0 1em 0;
+  transition: ease-in-out, all .35s ease-in-out;
+}
+select.logRegInput {
+  height: 2.5em;
+  font-family: 'Montserrat', 'Helvetica Neue', 'Segoe UI', sans-serif;
+  font-weight: 600;
+  color: rgb(150, 150, 150);
+  text-align: center;
+  text-align-last: center;
+  -moz-text-align-last: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url('../../resources/down.svg') 97% / 5% no-repeat #EEE;
+
+}
+.logRegInput:focus {
+  outline: none;
+  -webkit-box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.25);
+  box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.25);
+}
+.logRegInput::placeholder {
+  font-family: 'Montserrat', 'Helvetica Neue', 'Segoe UI', sans-serif;
+  font-weight: 600;
+  text-align: center;
+}
+.logRegInput[aria-invalid="true"] {
+  border: 1px solid rgba(255, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 3px 5px 0px rgba(255, 0, 0, 0.25);
+  -moz-box-shadow: 0px 3px 5px 0px rgba(255, 0, 0, 0.25);
+  box-shadow: 0px 3px 5px 0px rgba(255, 0, 0, 0.25);
+}
+
+.submit {
+  color: white;
+  font-size: 1em;
+  font-weight: 600;
+  background-color: rgb(134, 177, 233);
+  border: none;
+  border-radius: 3px;
+  padding: 0.4em;
+  margin: 1em 0;
+}
+.submit:hover {
+  cursor: pointer;
+  background-color: rgb(119, 149, 189);
+  -webkit-box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.25);
+  box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.25);
+}
+
+.logRegError {
+  font-size: 0.5em;
+  font-weight: 500;
+  color: red;
+  text-align: left;
+  margin: 0 0 0 0.1em;
+}
+.finalError {
+  font-size: 0.8em;
+  font-weight: 600;
+  color: red;
+}
+

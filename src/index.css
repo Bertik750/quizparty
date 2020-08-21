@@ -11,7 +11,9 @@ body {
   background: rgb(240, 240, 240);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  height: 100%;
+  background: linear-gradient(0deg, rgb(210, 210, 208) 49.5%,rgb(169, 181, 193) 0.5%, rgb(146, 192, 240) 50%) no-repeat;
+  background-color: rgb(210, 210, 208);
 }
+

@@ -1,9 +1,10 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
+import { motion } from "framer-motion";
 import '../App.css';
 import Start from './Start';
-import { SocketContext } from './socket';
+import { SocketContext } from './context/socket';
 import socketIOClient from "socket.io-client";
-import { InfoContext } from './info';
+import { InfoContext } from './context/info';
 
 const Play = () => {
 
@@ -23,24 +24,20 @@ const Play = () => {
     //}
   }
 
-  /*useEffect(() => {
-    if(info.name !== "") {
-      setNameAlert(false);
-    }
-  }, [info])*/
+
+  const overlay = {
+    open: { opacity: 1, zIndex: 2 },
+    closed: { opacity: 0, zIndex: -1 },
+  }
 
   return (
     <div style={{textAlign: "center"}}>
       <h2>Welcome</h2>
       <p>Compete with the world in quizes, while also studying for the IB!</p>
-      <button className="playButton" onClick={connect}>Play!</button>
-      {open &&
-        <div className="overlay">
-          <Start connect={connect}/>
-        </div>
-      }
-      <h3>About</h3>
-      <p>hi</p>
+      <button className="playButton" onClick={connect}>PLAY!</button>
+        <motion.div className="overlay" initial={false} animate={open ? "open" : "closed"} variants={overlay}>
+          <Start connect={connect} open={open}/>
+        </motion.div>
     </div>
   );
 }

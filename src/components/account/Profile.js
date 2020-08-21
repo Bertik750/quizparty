@@ -1,21 +1,45 @@
-import React, {useContext} from 'react';
-import { InfoContext } from '../info';
-import Cookie from "js-cookie";
+import React, {useContext, useEffect, useState} from 'react';
+import { InfoContext } from '../context/info';
 
 const Profile = () => {
 
-  const [info, setInfo] = useContext(InfoContext);
+  const [info] = useContext(InfoContext);
+  const [level, setLevel] = useState("");
+  const [prog, setProgress] = useState(null);
 
-  const signOut = () => {
-    Cookie.remove('token')
-    setInfo({});
-  }  
+  useEffect(() => {
+    function calcLevel() {
+      const y = 0.75 * Math.log(info.totalScore / 1000 + 1) / Math.log(2);
+      return y*10;
+    }
+    const calc = calcLevel();
+    const lvl = Math.floor(calc);
+    const progress = calc - lvl;
+    setLevel(lvl);
+    setProgress(progress);
+  }, [info.totalScore])
 
   return (
-    <div className="container">
-      <p>profile</p>
-      <p>{info.fullName}</p>
-      <button onClick={signOut}>Sign out</button>
+    <div>
+      <div className="profileHead">
+        <svg width="11%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd" strokeLinejoin="round" strokeMiterlimit="2">
+            <image x="-5" y="0" width="200" href={require(`../../resources/level-icons/${Math.floor(level/10) * 10}.svg`)}/>
+            <text textAnchor="middle" x="95" y="120" fill="#4b4b4b" fontSize="4.5em" fontWeight="600">{level}</text>  
+          </svg>
+        <h3 className="accountName">
+
+          {info.fullName}
+        </h3>
+      </div>
+      <div>
+        <div className="levelProgressBox">
+          <span style={{color: "rgb(108, 125, 182)", fontWeight: 600}}>{level}</span>
+          <div className="progressbar">
+            <div style={{width: prog*100+"%"}}></div>
+          </div>
+          <span style={{color: "rgb(110, 110, 110)", fontWeight: 600}}>{level+1}</span>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,26 +1,32 @@
 import React, {useContext, useState, useEffect, useCallback} from "react";
 import './Start.css'
-import { SocketContext } from './socket';
+import { SocketContext } from './context/socket';
 
 const Ques = (props) => {
 
   const [socket] = useContext(SocketContext);
   const [selected, setSelected] = useState(false);
 
-  const submitAnswer = (answ, id) => {
-    if(!selected) {
+  const submitAnswer = useCallback((answ, id) => {
+    if(selected) return;
+    setSelected(id);
+    if(props.setIndex) { //check if ques is used in friend challenge
+      if(props.correct === answ) {
+        props.setScore(s => s+1);
+      }
+      setTimeout(() => {
+        props.setIndex(i => i+1);
+      }, 250)
+    } else { // global challenge
       socket.emit('answ', [props.index, answ]);
-      setSelected(id);
-      console.log(id);
-      console.log(answ);
     }
-  };
+  }, [props.index, selected, socket]);
 
   const Qbox = ({answ, id}) => {
     return (
       <div 
         onClick={() => submitAnswer(answ, id)} 
-        className={`qbox ${selected === id ? props.correct ? 'correct' : 'not' : 'none'}`}
+        className={`qbox ${selected === id ? (props.correct === true || props.correct === answ) ? 'correct' : 'not' : 'none'}`}
         >
         <h3>{answ}</h3>
       </div>
@@ -36,7 +42,7 @@ const Ques = (props) => {
       const val = "answ" + key;
       submitAnswer(props[val], Number(key));
     }
-  }, [props]);
+  }, [props, submitAnswer]);
 
   useEffect(() => {
     window.addEventListener('keydown', downHandler);
@@ -48,7 +54,6 @@ const Ques = (props) => {
 
   return (
     <div className="ques">
-      <h1 className="question">{props.question}</h1>
       <Qbox id={1} answ={props.answ1}/>
       <Qbox id={2} answ={props.answ2}/>
       <Qbox id={3} answ={props.answ3}/>

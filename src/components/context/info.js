@@ -4,7 +4,6 @@ export const InfoContext = createContext();
 
 export const InfoProvider = (props) => {
   const [info, setInfo] = useState({
-    name: "",
     school: "",
     highScore: ""
   });

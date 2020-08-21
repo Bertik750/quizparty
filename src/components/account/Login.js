@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react';
 import { useForm } from "react-hook-form";
-import { InfoContext } from '../info';
+import { motion } from "framer-motion";
+import { InfoContext } from '../context/info';
 import './Account.css';
 import axios from 'axios';
 import Cookie from "js-cookie";
@@ -29,6 +30,7 @@ const Login = ({start, setDidLogin}) => {
         if(start) {
           setDidLogin(true);
         }
+        console.log(response.data[1]);
         setInfo(response.data[1]);
       }
     } catch (error) {
@@ -39,44 +41,55 @@ const Login = ({start, setDidLogin}) => {
     }
   };
 
-
+  const variants = {
+    open: { scale: 1 },
+    closed: { scale: 0 },
+  }
+  const overlay = {
+    open: { opacity: 1, zIndex: 2 },
+    closed: { opacity: 0, zIndex: -1 },
+  }
 
   return (
     <div>
-      <button onClick={handleOpen}>Login</button>
-      {open &&
-        <div className="overlay">
-            <div className="reg">
+      <button className="loginButton profileButton" onClick={handleOpen}>LogIn</button>
+        <motion.div className="overlay" initial={false} animate={open ? "open" : "closed"} variants={overlay}>
+            <motion.div className="reg" initial={false} animate={open ? "open" : "closed"} variants={variants}>
               <span className="xx" onClick={handleOpen}>X</span>
-              <h2>Log in</h2>
+              <h2>LogIn</h2>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <label>Name:</label>
-                <input
-                  name="name"
-                  ref={register({
-                    required: 'Required',
-                  })}
-                />
-                {errors.name && errors.name.message}
+                <div className="formContainer">
+                  <span className="logRegError">{errors.name && errors.name.message}</span>
+                  <input
+                    className="logRegInput"
+                    aria-invalid={errors.name ? "true" : "false"}
+                    name="name"
+                    placeholder="name or email"
+                    ref={register({
+                      required: 'Required',
+                    })}
+                  />
+                  
+                  <span className="logRegError">{errors.password && errors.password.message}</span>
+                  <input
+                    className="logRegInput"
+                    aria-invalid={errors.password ? "true" : "false"}
+                    name="password"
+                    type="password"
+                    placeholder="password"
+                    ref={register({
+                      required: 'Required',
+                    })}
+                  />
 
-                <label>Password:</label>
-                <input
-                  name="password"
-                  type="password"
-                  ref={register({
-                    required: 'Required',
-                  })}
-                />
-                {errors.password && errors.password.message}
-
-                <button type="submit">Log in</button>
-                {error &&
-                  <p>{error}</p>
-                }
+                  <button type="submit" className="submit">LogIn</button>
+                  {error &&
+                    <span className="finalError">{error}</span>
+                  }
+                </div>
               </form>
-            </div>
-        </div>
-      }
+            </motion.div>
+        </motion.div>
     </div>
   );
 }

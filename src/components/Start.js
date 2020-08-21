@@ -1,11 +1,13 @@
 import React, {useContext, useState, useEffect} from "react";
+import { motion } from "framer-motion";
 import './Start.css';
 import Ques from './Ques';
 import Register from './account/Register';
 import Login from './account/Login';
-import { InfoContext } from './info';
-import { SocketContext } from './socket';
+import { InfoContext } from './context/info';
+import { SocketContext } from './context/socket';
 import socketIOClient from "socket.io-client";
+import Cookie from 'js-cookie';
 
 const Start = (props) => {
 
@@ -29,7 +31,7 @@ const Start = (props) => {
 
   const startQuiz = () => {
     if(!quizState) {
-      if(selSubjects.length === 6) {
+      if(selSubjects.length > 2) {
         const subData = selSubjects.map(v => v.toLowerCase());
         if(!info._id) {
           info._id = "guest";
@@ -37,14 +39,16 @@ const Start = (props) => {
         socket.emit('start', {id: info._id, subjects: subData});
         setQuiz(!quizState);
       } else {
-        setSelSubErr("Please choose 6 subjects");
+        setSelSubErr("Please choose at least 3 subjects");
       }
     }
     let localLen = 0;
     let localIndex = 0;
     let localScore = 0;
+    let localQues = [];
     socket.on('ques', (data) => {
       setQues(data);
+      localQues = data;
       localLen = data.length;
       //countdown
       let c = 2;
@@ -56,7 +60,7 @@ const Start = (props) => {
     });
   
     socket.on('time', (data) => {
-      let sec = data % 60;
+      let sec = (data % 60) < 10 ? "0"+(data % 60) : data % 60;
       let min = Math.floor(data / 60);
       setTime(min+":"+sec);
     });
@@ -69,6 +73,9 @@ const Start = (props) => {
       setScore(data[1]);
       localScore = data[1];
       setNowCor(data[0]);
+      if(!data[0] && info.name) {
+        setInfo(prevState => ({...prevState, questionsWrong: [...prevState.questionsWrong, localQues[localIndex].id]}));
+      }
       setTimeout(() => {
         if(localIndex+1 < localLen) {
           setIndex(i => i+1);
@@ -99,21 +106,38 @@ const Start = (props) => {
     setTime("");
     await setSocket(socketIOClient('http://10.0.1.9:8080'));
   }
+  const xOut = async () => {
+    setQuiz(false);
+    setCount(3);
+    setScore(0);
+    setIndex(0);
+    setTime("");
+    props.connect();
+  }
 
   const add = (e) => {
-    if(selSubjects.length +1 <= 6) {
-      const val = e.target.getAttribute("value");
-      setSelSub(oldArray => [...oldArray, val]);
-      setSubjects(subjects.filter(item => item !== val));
+    const val = e.target.getAttribute("value");
+    if(selSubjects.indexOf(val) > -1) {
+      setSelSub(selSubjects.filter(item => item !== val));
+      Cookie.set("subjectsCombination", JSON.stringify(selSubjects.filter(item => item !== val)));
+      setSelSubErr("");
     } else {
-      setSelSubErr("Too much subjects!");
+      if(selSubjects.length +1 <= 6) {
+        setSelSub(oldArray => [...oldArray, val]);
+        Cookie.set("subjectsCombination", JSON.stringify([...selSubjects, val]));
+        setSelSubErr("");
+      } else {
+        setSelSubErr("Too much subjects!");
+      }
     }
   }
-  const remove = (e) => {
-    const val = e.target.getAttribute("value");
-    setSelSub(selSubjects.filter(item => item !== val));
-    setSubjects(oldArray => [...oldArray, val]);
-  }
+  useEffect(() => {
+    if(selSubjects.length === 0) {
+      const subjectsFromCookie = Cookie.get("subjectsCombination") ? JSON.parse(Cookie.get("subjectsCombination")) : null;
+      if(subjectsFromCookie === null) return;
+      setSelSub(subjectsFromCookie);
+    }
+  }, [])
 
   useEffect(() => {
     if(info._id !== "guest" && quizState === 'fin' && didLogin === true) {
@@ -122,47 +146,75 @@ const Start = (props) => {
     }
   }, [info._id, quizState, socket, didLogin]);
 
+  const variants = {
+    open: { scale: 1, display: "block" },
+    closed: { scale: 0, display: "" },
+  }
+
   return (
-    <div className="popQuiz">
-      <h2 className="title" style={{fontSize: "1em", margin: 10}}>EpicQuiz</h2>
-      <span className="x" onClick={props.connect}>X</span>
+    <motion.div className="popQuiz" initial={false} animate={props.open ? "open" : "closed"} variants={variants}>
+      <span className="x" onClick={xOut}>X</span>
       {!quizState &&
         <div>
-          <h4>How to play:</h4>
-          <h4>Choose six subjects to recieve questions from:</h4>
-          <div className="container">
-            {
-            selSubjects.map((el, i) =>
-              <div key={i} value={el} onClick={e => remove(e)}>{el}</div>
-              )
-            }
+          <h3>The Quiz</h3>
+          <div className="tutorial">
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Faucibus vitae aliquet nec ullamcorper sit amet. Nulla facilisi nullam vehicula ipsum a arcu cursus vitae.
+            </p>
           </div>
-          <div className="container">
-            {
-              subjects.map((el, i) =>
-              <div key={i} value={el} onClick={e => add(e)}>{el}</div>
-              )
-            }
+          <br />
+          <div className="choose globe">
+            <div className="quizList subjects">
+              {
+                subjects.map((el, i) =>
+                <div 
+                  key={i} 
+                  value={el} 
+                  onClick={e => add(e)} className={selSubjects.indexOf(el) > -1 ? "selected" : null}>
+                {el}
+                </div>
+                )
+              }
+            </div>
           </div>
-          {selSubErr}
-          <button onClick={startQuiz}>Start Quiz</button>
+          <button className="startQuizButton" onClick={startQuiz}>Start Quiz</button>
+          <p>{selSubErr}</p>
         </div>
       }
-      <p>{time}</p>
-      <p>{index+1 + "/" +questions.length}</p>
-      {countdown > 0 &&
-        <p>{countdown}</p>
+      {countdown > 0 && quizState === true &&
+        <motion.p 
+          className="countDown"
+          key={countdown}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{
+            opacity: 1,
+            y: 10
+          }}
+        >{countdown}</motion.p>
       }
-      <p>{score}</p>
       {countdown < 1 && quizState === true && 
-        <Ques question={questions[index].question} 
-          answ1={questions[index].alt1} 
-          answ2={questions[index].alt2} 
-          answ3={questions[index].alt3} 
-          answ4={questions[index].alt4}
-          index={index}
-          correct={nowCorrect}
-        />
+        <div>
+          <div className="quizHeader">
+            <div className="quizProgress">
+              <span>{index+1 + "/" +questions.length}</span>
+            </div>
+            <div className="quizQuestion">
+              <span>{questions[index].question}</span>
+            </div>
+            <div className="timeScore">
+              <p>{time}</p>
+              <p>{score}</p>
+            </div>
+          </div>
+          <Ques
+            answ1={questions[index].alt1} 
+            answ2={questions[index].alt2} 
+            answ3={questions[index].alt3} 
+            answ4={questions[index].alt4}
+            index={index}
+            correct={nowCorrect}
+          />
+        </div>
       }
       {quizState === 'fin' &&
         <div>
@@ -192,9 +244,10 @@ const Start = (props) => {
             </div>
           }
           <button onClick={playAgain}>Play Again</button>
+
         </div>
       }
-    </div>
+    </motion.div>
   );
 }
 

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>levels/10-19</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-38.6%" y="-35.4%" width="177.3%" height="170.8%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.160620629 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <linearGradient x1="95.7466919%" y1="0%" x2="4.25330813%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#F2C1A4" offset="0%"></stop>
+            <stop stop-color="#F8DAAE" offset="100%"></stop>
+        </linearGradient>
+        <path d="M0,5.5 C0.50894189,9.92903275 1.17560856,13.2623661 2,15.5 C2.82439144,17.7376339 4.49105811,20.4043006 7,23.5 L15,23.5 C17.5015956,20.4242406 19.1682622,17.7575739 20,15.5 C20.8317378,13.2424261 21.4984044,9.90909276 22,5.5 L11,0.5 L0,5.5 Z" id="path-3"></path>
+        <filter x="-13.6%" y="-13.0%" width="127.3%" height="126.1%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <filter x="-18.2%" y="-17.4%" width="136.4%" height="134.8%" filterUnits="objectBoundingBox" id="filter-5">
+            <feGaussianBlur stdDeviation="1.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="1" dy="-1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowInnerInner1" result="shadowMatrixInner1"></feColorMatrix>
+            <feGaussianBlur stdDeviation="1.5" in="SourceAlpha" result="shadowBlurInner2"></feGaussianBlur>
+            <feOffset dx="-1" dy="1" in="shadowBlurInner2" result="shadowOffsetInner2"></feOffset>
+            <feComposite in="shadowOffsetInner2" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner2"></feComposite>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.5 0" type="matrix" in="shadowInnerInner2" result="shadowMatrixInner2"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner2"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="levels/10-19" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-badge" filter="url(#filter-1)" transform="translate(4.000000, 3.000000)">
+            <g id="shape1">
+                <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                <use fill="url(#linearGradient-2)" fill-rule="evenodd" xlink:href="#path-3"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-3"></use>
+                <path stroke="#B98554" stroke-width="1" d="M11,1.04922936 L0.53889092,5.80427894 C1.03610655,10.0018043 1.67694234,13.1768109 2.46917156,15.3271473 C3.26288826,17.4815212 4.85670807,20.037135 7.23895561,23 L14.7615613,23 C17.1365766,20.0560291 18.7301599,17.5003906 19.5308284,15.3271473 C20.3299947,13.1579817 20.9709856,9.98304376 21.4614902,5.80445216 L11,1.04922936 Z" stroke-linejoin="square"></path>
+            </g>
+        </g>
+    </g>
+</svg>

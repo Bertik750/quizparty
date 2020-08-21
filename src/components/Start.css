@@ -1,14 +1,19 @@
 .popQuiz {
   position: absolute;
   z-index: 2;
-  width: calc(100% - 40px);
-  height: calc(100vh - 40px);
+  margin: 0 5vw 0 5vw;
+  width: 90vw;
+  top: 75px;
+  height: calc(90vh - 75px);
   background-color: white;
-  top: 20px;
-  left: 20px;
   -webkit-box-shadow: 0px 10px 30px 0px rgba(78,76,135,0.8);
   -moz-box-shadow: 0px 10px 30px 0px rgba(78,76,135,0.8);
   box-shadow: 0px 10px 30px 0px rgba(78,76,135,0.8);
+}
+@media only screen and (max-width: 650px) {
+  .popQuiz {
+    top: 60px;
+  }
 }
 
 .x {
@@ -18,8 +23,86 @@
   cursor: pointer;
 }
 
+.tutorial {
+  text-align: justify;
+  width: 85%; 
+  margin: auto;
+}
+
+.globe::before {
+  content: ' ';
+  width: 50%;
+  height: 50%;
+  background-image: url('../resources/globe.svg');
+  background-repeat: no-repeat;
+  background-size: 40%;
+}
+
+.subjects>* {
+  cursor: pointer;
+  color: rgb(101, 101, 101);
+  font-weight: 600;
+  flex: 1 250px 150px;
+  margin: 0.3em 0.5em;
+  padding: 0.5em 0;
+  border-radius: 20px;
+  border: 0.125em solid rgb(218, 233, 253);
+  background-color: rgb(230, 241, 255);
+  -webkit-box-shadow:  1px 2px 6px 0px rgba(97, 97, 97, 0.5);
+  -moz-box-shadow: 1px 2px 6px 0px rgba(97, 97, 97, 0.5);
+  box-shadow: 1px 2px 6px 0px rgba(97, 97, 97, 0.5);
+}
+.subjects>*:hover {
+  -webkit-box-shadow:  2px 2px 6px 0px rgb(124, 168, 250);
+  -moz-box-shadow: 2px 2px 5px 0px rgb(124, 168, 250);
+  box-shadow: 0px 0px 5px 0px rgb(124, 168, 250);
+  transition: all 0.5s ease;
+}
+
+.selected {
+  border: 2px solid blue;
+}
+
+.startQuizButton {
+  width: 50%;
+  font-size: 1.25em;
+  line-height: 1.25em;
+  margin: 0.3em;
+  padding: 0.3em;
+  color: white;
+  font-weight: 600;
+
+  border-radius: 5px;
+  border: 0.125em solid rgb(119, 149, 189);
+  background-color: rgb(134, 177, 233);
+
+  -webkit-box-shadow: 0px 4px 11px 0px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 4px 11px 0px rgba(0,0,0,0.25);
+  box-shadow: 0px 4px 11px 0px rgba(0,0,0,0.25);
+}
+.startQuizButton:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 0px 4px 11px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 4px 11px 0px rgba(0,0,0,0.5);
+  box-shadow: 0px 4px 11px 0px rgba(0,0,0,0.5);
+}
+
+.countDown {
+  display: absolute;
+  top: 50vh;
+  font-size: 200px;
+  font-weight: 800;
+  text-align: center;
+}
 
 /* QUESTIONS */
+
+.quizHeader {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  margin: 20px 2em;
+}
 
 .ques {
   display: grid;

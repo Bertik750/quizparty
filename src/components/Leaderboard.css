@@ -12,9 +12,8 @@ h2 span {
   list-style-type: none;
   padding-left: 0;
   margin: 0 auto;
-  overflow:hidden; 
   overflow-y:scroll;
-  max-height: calc(100vh - 240px);
+  max-height: calc(100vh - 340px);
 }
 ::-webkit-scrollbar {
   width: 4px;
@@ -35,57 +34,41 @@ h2 span {
 .rank {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  border: 2px solid rgba(185, 185, 185, 0.7);
-  border-radius: 3px;
-  margin: 3%;
-  -webkit-box-shadow: 0px 2px 3px 0 rgba(0, 0, 0, 0.144);
-  -moz-box-shadow: 0px 2px 3px 0 rgba(0, 0, 0, 0.144);
-  box-shadow: 0px 2px 3px 0 rgba(0, 0, 0, 0.144);
+  cursor: pointer;
 }
-.num {
-  width: 15%;
-  font-weight: 600;
-  min-height: 22px;
-  border-right: 2px rgba(185, 185, 185, 0.7) solid;
-  border-radius: 2px;
-  text-align: center;
-  padding: 3px;
+
+.personal {
+  position: relative;
+  background-color: #fff; 
 }
-.top3 {
-  text-shadow: 0px 3px 5px rgba(43, 50, 73, 0.6);
-  color: white;
-  font-weight: 900;
-  font-size: 1.2em;
+.personalSvg {
+  margin: 25px 0 0 0;
 }
-.c0 {
-  background: linear-gradient(60deg, #BF953F, rgb(211, 206, 156), #AA771C); 
-  padding: 6px;
-  width: 14%;
+@media screen and (max-height: 715px) {
+  .personal {
+    position: absolute;
+    background-color: #fff; 
+    bottom: 0;
+    height: 75px;
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
+  }
 }
-.c1 {
-  background: linear-gradient(60deg, #848fa0, #c1c3c5,#848fa0);
-  padding: 5px;
-  width: 14%;
+
+.loadMore {
+  width: 100%;
+  height: 15px;
+  border: none;
+  line-height: 12px;
+  background-color: rgba(170, 170, 170, 0.5);
+  -webkit-box-shadow: 0px -5px 5px 0px rgba(170,170,170,0.25);
+  -moz-box-shadow: 0px -5px 5px 0px rgba(170,170,170,0.25);
+  box-shadow: 0px -5px 5px 0px rgba(170,170,170,0.25);
 }
-.c2 {
-  background:  linear-gradient(60deg, #CD7F32, rgb(209, 180, 152), #CD7F32);
-  padding: 4px;
-  width: 14%;
-}
-.rest {
-  background-color: rgb(219, 219, 219);
-}
-.cont {
-  width: 78%;
-}
-.name {
-  padding-left: 10px;
-}
-.score {
-  float: right;
-  font-weight: 700;
+.loadMore:hover {
+  background-color: rgb(148, 192, 240);
 }
 
 .timeRank {

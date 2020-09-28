@@ -1,11 +1,16 @@
 import React, {useContext, useState, useEffect, useCallback} from "react";
-import './Start.css'
+import { motion } from "framer-motion";
+import useFitText from 'use-fit-text';
+import MathJax from 'react-mathjax2';
+import './Start.css';
 import { SocketContext } from './context/socket';
 
-const Ques = (props) => {
+
+const Ques = React.memo((props) => {
 
   const [socket] = useContext(SocketContext);
   const [selected, setSelected] = useState(false);
+  const { fontSize, ref } = useFitText({resolution: 10, maxFontSize: 150, minFontSize: 40});
 
   const submitAnswer = useCallback((answ, id) => {
     if(selected) return;
@@ -18,24 +23,44 @@ const Ques = (props) => {
         props.setIndex(i => i+1);
       }, 250)
     } else { // global challenge
+      props.setSending(true);
       socket.emit('answ', [props.index, answ]);
     }
-  }, [props.index, selected, socket]);
+  }, [props, selected]);
 
   const Qbox = ({answ, id}) => {
-    return (
+    return(
       <div 
         onClick={() => submitAnswer(answ, id)} 
-        className={`qbox ${selected === id ? (props.correct === true || props.correct === answ) ? 'correct' : 'not' : 'none'}`}
+        className={`qbox ${selected === id ? 
+            (props.correct === true || props.correct === answ) ? 'correct' : 'not' 
+            : 'none'}
+         ${(selected === id && props.sending) ? 'sending' : ' '}`}
         >
-        <h3>{answ}</h3>
+        <motion.p ref={ref} style={{ fontSize, height: 150, width: "100%" }}
+          key={props.answ1}
+          initial={{opacity: 0}}
+          animate={{opacity: 1}}
+        >
+          {props.category === "math" ?
+            <MathJax.Context input='ascii'>
+                <MathJax.Node>{answ}</MathJax.Node>
+            </MathJax.Context>
+          :
+            <>{answ}</>
+          }
+          
+        </motion.p>
+        {props.sending && selected === id &&
+          <p style={{position: "absolute", textAlign: "center", width:"50%"}}>Sending...</p>
+        }
       </div>
     )
-  }
+  };
 
   useEffect(() => {
     setSelected(false);
-  }, [props.question]);
+  }, [props.question, props.index]);
 
   const downHandler = useCallback(({key}) => {
     if ([1, 2, 3, 4].indexOf(Number(key)) > -1) {
@@ -54,12 +79,12 @@ const Ques = (props) => {
 
   return (
     <div className="ques">
-      <Qbox id={1} answ={props.answ1}/>
-      <Qbox id={2} answ={props.answ2}/>
-      <Qbox id={3} answ={props.answ3}/>
-      <Qbox id={4} answ={props.answ4}/>
+      <Qbox id={1} answ={props.answ1} />
+      <Qbox id={2} answ={props.answ2} />
+      <Qbox id={3} answ={props.answ3} />
+      <Qbox id={4} answ={props.answ4} />
     </div>
   )
-}
+});
 
 export default Ques;

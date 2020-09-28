@@ -25,7 +25,7 @@ const Leaderboard = () => {
   }
 
   const fetchData = useCallback(async (timeFrame) => {
-    const result = await fetch("http://localhost:8080/leaderboard", {
+    const result = await fetch("http://10.0.1.9:8080/leaderboard", {
       headers: {
         'highscore': info[timeFrame + "highScore"],
         'timeframe': timeFrame,
@@ -40,7 +40,7 @@ const Leaderboard = () => {
 
   const loadMore = async () => {
     setLoading(true);
-    const result = await fetch("http://localhost:8080/leaderboard/more", {
+    const result = await fetch("http://10.0.1.9:8080/leaderboard/more", {
       headers: {
         'timeframe': actI,
         'skip': loaded
@@ -129,15 +129,15 @@ const Leaderboard = () => {
                   />
                   {el.country && 
                     <image x="840" y="0" width="100" transform="rotate(50, 840, 40)" filter="url(#filter)"
-                      href={require(`../resources/flags/${el.country.toLowerCase()}.svg`)}/>
-                  }
+                      href={require(`../resources/flags/cz.svg`)}/>
+                  } 
                   <rect x="805" y="80" width="10" height="100" fill="grey" transform="rotate(-128, 800, 80)" /> 
                   <circle cx="85" cy="75" fill="#fff" r="71.3" />
                   <motion.rect x="75" y="22" width="725" height="105" rx="30" fill="#fff" 
                     variants={scale2} 
                   />
                   <text textAnchor="middle" x="83" y="75" fontWeight="600" fontSize="4.5em" dy="0.35em">{i+1}</text>
-                  <image x="130" y="20" width="110" href={require(`../resources/level-icons/${Math.floor(calcLevel(el.totalScore)/10) * 10}.svg`)}/>
+                  <motion.image x="130" y="20" width="110" href={require(`../resources/level-icons/${Math.floor(calcLevel(el.totalScore)/10) * 10}.svg`)}/>
                   <text textAnchor="middle" x="186" y="87" fill="#4b4b4b" fontSize="2.25em" fontWeight="600">{calcLevel(el.totalScore)}</text>
                   <text x="230" y="75" fontSize="3em" fontWeight="400" dy="0.35em">{el.fullName}</text>
                   <text textAnchor="end" x="755" y="75" fontWeight="600" fontSize="3em" dy="0.35em">{el.highScore}</text>

@@ -128,7 +128,7 @@ const ChallengeFriend = ({roomId}) => {
 
   return (
     <div style={{textAlign: "center"}}>
-      <button onClick={openAndLoad}>Challenge your friend!</button>
+      <button className="playButton" style={{fontSize: "0.8em"}} onClick={openAndLoad}>Challenge your friend!</button>
         <motion.div className="overlay" initial={false} animate={open ? "open" : "closed"} variants={overlay}>
           <motion.div className="popQuiz" initial={false} animate={open ? "open" : "closed"} variants={variants}>
             <span className="x" onClick={close}>X</span>

@@ -36,7 +36,7 @@ const QuestionForm = () => {
             ref={register({
               required: 'Required',
               pattern: {
-                value: /^[A-Z0-9._ %+-]+[?]$/i,
+                value: /(.|\n)*/g,
                 message: "invalid question"
               }
             })}

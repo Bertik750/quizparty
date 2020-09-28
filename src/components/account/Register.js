@@ -6,7 +6,6 @@ import { InfoContext } from '../context/info';
 import './Account.css';
 import axios from 'axios';
 import Cookie from "js-cookie";
-import 'react-flags-select/css/react-flags-select.css';
 
 const Register = ({start, setDidLogin}) => {
 
@@ -78,7 +77,7 @@ const Register = ({start, setDidLogin}) => {
                         message: 'Too short'
                       },
                       maxLength : {
-                        value: 12,
+                        value: 13,
                         message: 'Too long'
                       },
                       pattern: {
@@ -157,7 +156,7 @@ const Register = ({start, setDidLogin}) => {
                     ref={register({
                       required: 'Required',
                       pattern: {
-                        value:  /\b(\w*Scountry\w*)\b/g,
+                        value:  /^(?!Select a country$)/g,
                         message: "Required"
                       }
                     })}>

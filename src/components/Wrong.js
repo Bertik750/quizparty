@@ -20,12 +20,12 @@ const Wrong = () => {
 
   const openQuestions = async () => {
     setOpen(true);
-    if(Object.keys(info).length === 0 && info.constructor === Object) {
+    console.log(info);
+    if(!info.name) {
       setLoading(false);
       setMessage("Please register to use this");
       return
-    }
-    if(info.questionsWrong.length > 0) {
+    } else if(info.questionsWrong && info.questionsWrong.length > 0) {
       try {
         let Header = new Headers();
         Header.append("Content-Type", "application/json");
@@ -119,7 +119,7 @@ const Wrong = () => {
 
   return (
     <div style={{textAlign: "center"}}>
-      <button onClick={openQuestions} >Review wrong answers!</button>
+      <button className="playButton" style={{fontSize: "0.8em", marginTop: 10}} onClick={openQuestions} >Review wrong answers!</button>
         
         <motion.div className="overlay" initial={false} animate={open ? "open" : "closed"} variants={variants}>
           <div className="popQuiz" style={{height: "auto", paddingBottom: "1em"}}>

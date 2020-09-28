@@ -22,6 +22,7 @@ const App = (props) => {
             <SocketProvider>
               <Play />
               <br />
+              <br />
               <ChallengeFriend roomId={props.roomId} />
             </SocketProvider>
             <Wrong />

@@ -9,7 +9,6 @@ import { InfoContext } from './context/info';
 const Play = () => {
 
   const [socket, setSocket] = useContext(SocketContext);
-  const [info] = useContext(InfoContext);
   const [open, setOpen] = useState(false);
 
   const connect = async () => {

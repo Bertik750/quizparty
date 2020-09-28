@@ -13,6 +13,7 @@
 @media only screen and (max-width: 650px) {
   .popQuiz {
     top: 60px;
+    height: calc(90vh - 60px);
   }
 }
 
@@ -27,15 +28,6 @@
   text-align: justify;
   width: 85%; 
   margin: auto;
-}
-
-.globe::before {
-  content: ' ';
-  width: 50%;
-  height: 50%;
-  background-image: url('../resources/globe.svg');
-  background-repeat: no-repeat;
-  background-size: 40%;
 }
 
 .subjects>* {
@@ -89,7 +81,7 @@
 
 .countDown {
   display: absolute;
-  top: 50vh;
+  margin: auto;
   font-size: 200px;
   font-weight: 800;
   text-align: center;
@@ -102,38 +94,78 @@
   justify-content: space-between;
   flex-wrap: nowrap;
   margin: 20px 2em;
+  height: 80px;
+
+  border: 2px solid rgba(185, 185, 185, 0.7);
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 2px 4px 1px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 2px 4px 1px rgba(0,0,0,0.25);
+  box-shadow: 0px 2px 4px 1px rgba(0,0,0,0.25);
+  
+}
+.quizProgress, .timeScore {
+  background-color: rgb(235, 235, 235);
+  width: 22%;
+}
+.quizProgress {
+  color: rgb(64, 64, 64);
+  font-weight: 800;
+  font-size: 1.4vw;
+  line-height: 80px;
+}
+@media only screen and (max-width: 700px) {
+  .quizProgress {
+    font-size: 2.2vw;
+    line-height: 1.2em;
+    padding: 30px 0;
+  }
+}
+.quizQuestion {
+  background: linear-gradient(0deg, rgba(255,255,255,1) 75%, rgba(241,241,241,1) 100%);
+}
+.timeScore {
+  line-height: 40px;
+}
+.timeScore > hr {
+  margin: 0 10%;
+}
+.time {
+  color: rgb(117, 117, 117);
+  font-weight: 500;
+}
+.score {
+  font-weight: 800;
 }
 
 .ques {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 80px 1fr 1fr;
-  height: calc(100vh - 200px);
+  grid-template-rows: 1fr 1fr;
+  height: 70%;
   margin: 20px;
-}
-
-.question {
-  color: rgb(74, 74, 74);
-  font-weight: 700;
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 1;
-  grid-row-end: 2;
 }
 
 .qbox {
   margin: 15px;
   color: rgb(83, 100, 157);
-  background-color: rgb(240, 240, 240);
-  border: 1px rgba(185, 185, 185, 0.7) solid;
+  background: rgb(240, 240, 240);
+  border: 2px solid rgba(185, 185, 185, 0.7);
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-content: center;
   flex-direction: column;
-  -webkit-box-shadow: -2px 5px 12px 0px rgba(78,76,135,0.5);
-  -moz-box-shadow: -2px 5px 12px 0px rgba(78,76,135,0.5);
-  box-shadow: -2px 5px 12px 0px rgba(78,76,135,0.5);
+  padding: 10px;
+  -webkit-box-shadow: 1px 2px 4px 0px rgba(78,76,135,0.2);
+  -moz-box-shadow: 1px 2px 4px 0px rgba(78,76,135,0.2);
+  box-shadow: 1px 2px 4px 0px rgba(78,76,135,0.2);
+}
+.sending {
+  border: 5px solid rgb(147, 186, 227);
+  -webkit-box-shadow: inset 0px 0px 50px 0px rgba(146,186,227,0.75);
+  -moz-box-shadow: inset 0px 0px 50px 0px rgba(146,186,227,0.75);
+  box-shadow: inset 0px 0px 50px 0px rgba(146,186,227,0.75);
+
 }
 .correct {
   animation-name: correct;
@@ -161,4 +193,55 @@
   }
 }
 
+/* FINAL PAGE */
 
+.fin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.finalScore {
+  border: 2px solid rgba(185, 185, 185, 0.7);
+  border-radius: 1em;
+  background-color: rgb(243, 243, 243);
+  width: 15em;
+  padding: 0.7em;
+  -webkit-box-shadow: inset 0px 0px 10px 0px rgba(146,186,227,0.75);
+  -moz-box-shadow: inset 0px 0px 10px 0px rgba(146,186,227,0.75);
+  box-shadow: inset 0px 0px 10px 0px rgba(146,186,227,0.75);
+}
+
+.bigScore {
+  margin: 0 auto;
+  font-weight: 800;
+  font-size: 4em;
+  letter-spacing: 0.1em;
+}
+
+.todaysRank {
+  font-weight: 600;
+  font-size: 1.5em;
+  display: inline;
+  margin: 0.5em;
+}
+
+.loginOrRegisterContainer {
+  margin: 1em;
+}
+.loginOrRegister {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.loginOrRegister > div {
+  margin: 0 10px;
+}
+
+.highScoreResult {
+  font-weight: 500;
+}
+
+.newTotalScore {
+  font-weight: 500;
+}

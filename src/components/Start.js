@@ -135,7 +135,7 @@ const Start = (props) => {
   useEffect(() => {
     if(selSubjects.length === 0) {
       const subjectsFromCookie = Cookie.get("subjectsCombination") ? JSON.parse(Cookie.get("subjectsCombination")) : null;
-      if(subjectsFromCookie === null) return;
+      if(subjectsFromCookie === null || subjectsFromCookie.length === 0) return;
       setSelSub(subjectsFromCookie);
     }
   }, [selSubjects])

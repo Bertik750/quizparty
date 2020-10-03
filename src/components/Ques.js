@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect, useCallback} from "react";
 import { motion } from "framer-motion";
 import useFitText from 'use-fit-text';
-import MathJax from 'react-mathjax2';
+import MathJax from "@innodoc/react-mathjax-node";
 import './Start.css';
 import { SocketContext } from './context/socket';
 
@@ -10,7 +10,7 @@ const Ques = React.memo((props) => {
 
   const [socket] = useContext(SocketContext);
   const [selected, setSelected] = useState(false);
-  const { fontSize, ref } = useFitText({resolution: 10, maxFontSize: 150, minFontSize: 40});
+  const { fontSize, ref } = useFitText({resolution: 10, maxFontSize: 150, minFontSize: 70});
 
   const submitAnswer = useCallback((answ, id) => {
     if(selected) return;
@@ -37,20 +37,20 @@ const Ques = React.memo((props) => {
             : 'none'}
          ${(selected === id && props.sending) ? 'sending' : ' '}`}
         >
-        <motion.p ref={ref} style={{ fontSize, height: 150, width: "100%" }}
+        <motion.div ref={ref} style={{ fontSize, height: 150, width: "100%" }}
           key={props.answ1}
           initial={{opacity: 0}}
           animate={{opacity: 1}}
         >
           {props.category === "math" ?
-            <MathJax.Context input='ascii'>
-                <MathJax.Node>{answ}</MathJax.Node>
-            </MathJax.Context>
+            <MathJax.Provider>
+                <MathJax.MathJaxNode displayType="inline" texCode={answ} />
+            </MathJax.Provider>
           :
             <>{answ}</>
           }
           
-        </motion.p>
+        </motion.div>
         {props.sending && selected === id &&
           <p style={{position: "absolute", textAlign: "center", width:"50%"}}>Sending...</p>
         }

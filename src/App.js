@@ -33,9 +33,9 @@ const App = (props) => {
           <div className="leaderboard box">
             <Leaderboard />
           </div>
-          {/*<div className="questions box">
+          <div className="questions">
             <CommunityQuestions />
-          </div>*/}
+          </div>
         </div>
       </InfoProvider>
     </div>

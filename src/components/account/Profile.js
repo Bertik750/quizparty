@@ -9,8 +9,8 @@ const Profile = () => {
 
   useEffect(() => {
     function calcLevel() {
-      const y = 0.75 * Math.log(info.totalScore / 1000 + 1) / Math.log(2);
-      return y*10;
+      const y = Math.sqrt(info.totalScore / 1000)*Math.LN10;
+      return y;
     }
     const calc = calcLevel();
     const lvl = Math.floor(calc);

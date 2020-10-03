@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
+import useFitText from "use-fit-text";
 
 const QuestionVote = () => {
 
   const [loading, setLoading] = useState(true);
   const [ques, setQues] = useState({});
   const [rating, setRating] = useState("");
+  const { fontSize, ref } = useFitText({resolution: 10, maxFontSize: 300});
 
   const fetchData = async () => {
     try {
@@ -50,17 +52,17 @@ const QuestionVote = () => {
   }, [])
 
   return (
-    <div>
+    <div className="quizList">
+      <div ref={ref} style={rating ? {display: "none"} : { fontSize, height: 40, width: "100%", textAlign: "center"}}>{ques.question}</div>
       {
       rating ?
-        <p>New Rating: {rating}%</p>
+        <p style={{textAlign: "center", width: "100%"}}>New Rating: {rating}%</p>
       :
       loading ? 
         <p>Loading...</p>
         :
-        <div>
-          <h2 style={{textAlign: "center"}}>{ques.question}</h2>
-          <h5 style={{textAlign: "center", margin: 0}}>Category: {ques.category}</h5>
+        <div className="quesFeedback">
+          <h5 style={{textAlign: "center", margin: 5}}>Category: {ques.category}</h5>
           <div className="boxRow">
             <p style={{backgroundColor: "lightGreen"}}>{ques.answer}</p>
             <p>{ques.alt1}</p>

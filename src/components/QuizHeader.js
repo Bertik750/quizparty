@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import useFitText from "use-fit-text";
-import MathJax from 'react-mathjax2';
+import MathJax from "@innodoc/react-mathjax-node";
 import './Start.css'
 
 const QuizHeader = React.memo(({index, questions, time, score}) => {
@@ -26,9 +26,11 @@ const QuizHeader = React.memo(({index, questions, time, score}) => {
         }}
       >
         {questions[index].category === "math" ?
-          <MathJax.Context input='ascii'>
-              <MathJax.Node>{questions[index].question}</MathJax.Node>
-          </MathJax.Context>
+          <MathJax.Provider>
+            <div style={{marginTop: 10}}>
+              <MathJax.MathJaxNode texCode={questions[index].question} />
+            </div>
+          </MathJax.Provider>
         :
           <>{questions[index].question}</>
         }

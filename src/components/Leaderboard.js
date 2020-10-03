@@ -4,8 +4,6 @@ import { BulletList } from 'react-content-loader';
 import './Leaderboard.css';
 import { InfoContext } from './context/info';
 
-const levelIcons = '../resources/level-icons';
-
 const Leaderboard = () => {
 
   const [info] = useContext(InfoContext);
@@ -95,8 +93,8 @@ const Leaderboard = () => {
   }; 
 
   const calcLevel = (score) => {
-    const y = 0.75 * Math.log(score / 1000 + 1) / Math.log(2);
-    return Math.floor(y*10);
+    const y = Math.sqrt(score / 1000)*Math.LN10;
+    return Math.floor(y);
   }
 
   return (
@@ -145,8 +143,27 @@ const Leaderboard = () => {
                     initial={{opacity: 0}} transition={{ ease: "easeOut", duration: 0.15 }} variants={appear}
                   />
                   <motion.text initial={{opacity: 0}} transition={{ ease: "easeOut", duration: 0.15 }} variants={appear}
-                    textAnchor="start" x="155" y="155" fontWeight="600" fontSize="1.7em" fill="rgb(205, 205, 205)" dy="0.35em">PROFILE
+                    textAnchor="start" x="155" y="155" fontWeight="600" fontSize="1.7em" fill="rgb(205, 205, 205)" dy="0.35em">SUBJECTS
                   </motion.text>
+                  {el.subjects &&
+                    <motion.foreignObject initial={{opacity: 0}} transition={{ ease: "easeOut", duration: 0.1 }} variants={appear} 
+                    x="155" y="190" width="150" height="110">
+                    {el.subjects.map((subject, i) =>
+                      i < 3 &&
+                      <div key={subject} style={{fontSize: 20, fontWeight: 600, color: "rgb(110, 110, 110)"}}>{subject.capitalize()}</div>
+                    )}
+                  </motion.foreignObject>
+                  }
+                  {el.subjects.length > 3 &&
+                    <motion.foreignObject initial={{opacity: 0}} transition={{ ease: "easeOut", duration: 0.1 }} variants={appear} 
+                    x="325" y="190" width="115" height="110">
+                    {el.subjects.map((subject, i) =>
+                      i > 2 &&
+                      <div key={subject} style={{fontSize: 20, fontWeight: 600, color: "rgb(110, 110, 110)"}}>{subject.capitalize()}</div>
+                    )}
+                  </motion.foreignObject>
+                  }
+                  
                   <motion.rect x="505" y="130" width="250" height="5" rx="1" fill="rgb(225, 225, 225)" 
                     initial={{opacity: 0}} transition={{ ease: "easeOut", duration: 0.15 }} variants={appear}
                   />
@@ -207,3 +224,7 @@ const Leaderboard = () => {
 }
 
 export default Leaderboard;
+
+String.prototype.capitalize = function() {
+  return this.charAt(0).toUpperCase() + this.slice(1);
+}

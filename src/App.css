@@ -53,7 +53,7 @@
 }
 
 .playButton {
-  width: 30%;
+  width: 50%;
   height: 2em;
   font-size: 1.5em;
   font-weight: 600;
@@ -73,7 +73,7 @@
 }
 .playButton:hover {
   cursor: pointer;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   border: 0.125em solid rgb(134, 177, 233);
   background-color: rgb(119, 149, 189);
 
@@ -108,13 +108,14 @@
 .questions {
   grid-column-start: 1;
   grid-column-end: 3;
-  grid-row-start: 4;
+  grid-row-start: 5;
   grid-row-end: 6;
-  background-color: rgba(255, 255, 255, 0.95);
-  margin-left: 40px;
-  margin-top: 20px;
-  margin-bottom: 0;
+  margin: 2.5vh 2vw 0 5vw;
+  background: transparent;
+  display: flex;
 }
+
+
 
 @media only screen and (max-width: 1000px) {
   .grid {
@@ -144,7 +145,7 @@
     width: 400px;
   }
   .playButton {
-    width: 40%;
+    width: 90%;
   }
 }
 @media only screen and (max-width: 440px) {

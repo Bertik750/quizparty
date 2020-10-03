@@ -1,6 +1,11 @@
 .communityQuesDiv {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  height: 25%;
+  width: 100%;
+  align-self: flex-end;
+}
+
+.quesFeedback {
+  width: 100%;
 }
 
 .boxRow {

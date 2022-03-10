@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Front-end for fun game I made called quizparty. Websocket live game.
 
 ## Available Scripts
 
